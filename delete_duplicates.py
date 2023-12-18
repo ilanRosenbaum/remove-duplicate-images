@@ -14,7 +14,7 @@ def get_image_phash(image_path):
         return None
 
 def get_media_phash(file_path: str):
-    if file_path.lower().endswith(('.png', '.jpg', '.jpeg')):
+    if file_path.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
         return get_image_phash(file_path)
     elif file_path.lower().endswith(('.mp4', '.mov')):
         return get_video_phash(file_path)
@@ -79,6 +79,10 @@ def remove_non_priority_duplicates(base_path: str, folders: dict, hashes: dict):
         
     return files_removed
 
+def populate_and_remove_duplicates(base_path, folders: dict):
+    hashes = populate_hashes(base_path, folders)
+    return remove_non_priority_duplicates(base_path, folders, hashes)
+
 def main():
     parser = argparse.ArgumentParser(description="Process images and videos to remove duplicates.")
     parser.add_argument('base_path', type=str, help='Base path for the folders')
@@ -87,8 +91,8 @@ def main():
 
     base_path = args.base_path
     priority_folders = args.folders
-    hashes = populate_hashes(base_path, priority_folders)
-    files_removed = remove_non_priority_duplicates(base_path, priority_folders, hashes)
+
+    files_removed = populate_and_remove_duplicates(base_path, priority_folders)
     print(f"Removed {files_removed} files")
 
 if __name__ == "__main__":
