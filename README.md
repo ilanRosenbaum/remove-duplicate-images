@@ -36,4 +36,4 @@ If you want to fix your photos metadata and delete the duplicates as per the pri
 ## Testing
 
 Currently testing is minimal, but if you'd like to run the tests run:
-`python test.py`
+`make test`

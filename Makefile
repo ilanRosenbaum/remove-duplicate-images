@@ -7,11 +7,15 @@
 .PHONY: run
 run:
 	@echo "Running fix_photos.py"
-	@python3 fix_photos.py $(path)
+	@python3 src/fix_metadata.py "$(path)"
 	@echo "Running delete_duplicates.py"
-	@python3 delete_duplicates.py $(path) $(folder_priority)
-
+	@python3 src/delete_duplicates.py "$(path)" '$(folder_priority)'
+	
+#***************************************************************************
+# Run tests
+#***************************************************************************
 .PHONY: test
 test:
 	@echo "Running tests"
-	@python3 -m unittest discover -s tests -p "*_test.py"
+	@python3 -m unittest discover -s test -p "*_test.py"
+
