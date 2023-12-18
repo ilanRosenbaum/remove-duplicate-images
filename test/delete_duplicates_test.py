@@ -22,10 +22,15 @@ class TestRemoveDuplicates(unittest.TestCase):
 
         populate_and_remove_duplicates(base_path, folders)
 
-        # Verify no file that includes "copy" in its filename remains
+        # Verify no file that includes "copy" in its filename remains and that the right amount of files remain
+        file_count = 0
         for _, _, files in os.walk(base_path):
             for file in files:
                 self.assertNotIn('copy', file)
+                if file != '.DS_Store':
+                    file_count += 1
+        
+        self.assertEqual(file_count, 4)        
 
 if __name__ == '__main__':
     unittest.main()
