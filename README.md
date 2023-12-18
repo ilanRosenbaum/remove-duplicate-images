@@ -1,4 +1,7 @@
+# Remove Duplicates
+
 ## Purpose
+
 I wanted to have all the images in my google photos on my device without having duplicates while maintaining my folder structure. This turned out to be much more difficult than anticipated. I used Google takeout to get my photos (used a different program to merge JSON files with photos) but now I needed a way to merge my google photos that don't have my local folder structure and my local photos while removing all duplicates.
 
 This is difficult because google compresses the files in such a way where they have different metadata and file size to the originals. My solution was to put all of the google photos files in one folder, port all my photos with folder structure from my phone to my computer, then use pHash to identity which photos look similar. Once we identity a photo already exists we consult a priority list of the folders. I chose to do it this way as if I photo exists in two folders, for example "food" and "camera" I want to retain the one inside food as that one that has already been organized. But if a file is in "camera" and "archive" I want to keep the photo in archive.
@@ -8,6 +11,7 @@ Videos are handled by garbing the first middle and last frame from a video, usin
 This entire script is wildly inefficient, if you have potential improvements they would be greatly appreciated, but given this only needed to work on time for me speed wasn't my priority.  
 
 ## Prerequisites
+
 Python >= 3.7.4
 - opencv-python
   - install with `pip install opencv-python`
